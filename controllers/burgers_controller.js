@@ -1,5 +1,5 @@
 var express = require("express");
-var burger = require("burger");
+var burger = require("../models/burger.js");
 var server = require("server");
 // put routes here
 

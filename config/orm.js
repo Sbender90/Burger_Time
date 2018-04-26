@@ -1,4 +1,4 @@
-var connection = require("connection");
+var connection = require("./connection");
 // mySQU functions to add update and delete from database
 selectOne();
 
