@@ -1,19 +1,32 @@
 var express = require("express");
+var router = express.Router();
 var burger = require("../models/burger.js");
-var server = require("server");
-// put routes here
 
-app.get("/", function(request, response) {
+router.get("/", function(request, response){
+    burger.all(function(data){
+    var burgerObject = {
+        burgers: data
+    };
+    console.log(burgerObject);
+    response.render("index", burgerObject);
+});
+});
+
+router.get("/", function(request, response) {
     connection.query("SELECT * FROM burgers;", function(error, data){
-        if (error) throw error;
-
+        console.log(error);
+        if (error) {
+            return response.status(500).end();
+        }
+console.log("test:", response);
         res.render("index", { burgers: data });
     
+
     });
 });
 
-app.post("/", function(request, response){
-    connection.query("INSERT INTO burgers ()burger_name) VALUES (?)", [request.body.burgers], function(error, result) {
+router.post("/", function(request, response){
+    connection.query("INSERT INTO burgers (burger_name) VALUES (?)", [request.body.burgers], function(error, result) {
         if (error) {
             return response.status(500).end();
         }
@@ -23,7 +36,7 @@ app.post("/", function(request, response){
     });
 });
 
-app.put("burgers/:id", function(request, response){
+router.put("burgers/:id", function(request, response){
     connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [request.body.burger_name, request.params.id], function(error, result) {
         if (error) {
             return res.status(500).end();
@@ -35,7 +48,7 @@ app.put("burgers/:id", function(request, response){
     });
 });
 
-app.delete("burgers/:id", function(request,response){
+router.delete("burgers/:id", function(request,response){
     connection.query("DELETE FROM burgers WHERE id = ?", [request.params.id], function(error, result){
         if (error){
             return res.status(500).end();

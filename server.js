@@ -3,7 +3,8 @@ var bodyParser = require('body-parser');
 
 var connection = require("./config/connection");
 var app = express();
-var PORT = connection;
+var PORT = process.env.PORT || 8080;
+// var PORT = connection;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -14,18 +15,12 @@ app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 var mysql = require("mysql");
-var connection = require("connection");
+var connection = require("./config/connection");
 
-connection.connect(function(err){
-    if(err){
-        console.error("error connecting: ", err.stack);
-        return;
-    }
-
-    console.log("connected as id: ", connection.threadId);
-});
-//add stuff here
+var routes = require("./controllers/burgers_controller.js")
+app.use(routes);
 
 app.listen(PORT, function(){
     console.log("Server listening on: ", PORT);
 });
+

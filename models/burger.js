@@ -1,4 +1,4 @@
-var orm = require("orm");
+var orm = require("../config/orm.js");
 
 var burger = {
     all: function(callback){
@@ -6,7 +6,7 @@ var burger = {
             callback(response);
         });
     }, 
-    create: function(collums, valuse, callback){
+    create: function(collums, values, callback){
         orm.create("burgers", collums, values, function(response){
             callback(response);
         });
