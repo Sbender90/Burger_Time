@@ -1,6 +1,18 @@
 var connection = require("../config/connection");
+
 // mySQU functions to add update and delete from database
-function objectSql(boject){
+
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
+function objectSql(object){
     var arr = [];
     for (var key in object){
         var value = object[key];
@@ -14,22 +26,14 @@ function objectSql(boject){
         return arr.toString();
 }
 
-// var orm = {
-//     all: function(tableInput, callback) {
-//         var queryString = "SELECT * FROM" + tableInput + ";";
-//         connection.query(queryString, function(error, result){
-//             if (error) {
-//                 throw error;
-//             }
-//             callback(result);
-//         });
-//     }
-// }, 
-
 var orm = {
     all: function(tableInput, cb) {
+      console.log('inside orm.all')
       var queryString = "SELECT * FROM " + tableInput + ";";
+      console.log(`QS = ${queryString}`);
+      // console.log(connection)
       connection.query(queryString, function(err, result) {
+        console.log('inside orm cb')
         if (err) {
           throw err;
         }
@@ -56,7 +60,19 @@ var orm = {
         cb(result);
       });
     },
-}
+    delete: function(table, condition, callback) {
+      var queryString = "DELETE FROM " + table;
+      queryString += " WHERE ";
+      queryString += condition;
+
+      connection.query(queryString, function(error, result){
+        if(error) {
+          throw error;
+        }
+        callback(result);
+      });
+    }
+};
 
 module.exports = orm;
 

@@ -4,17 +4,35 @@
 <h3>Or eat them and erase them from your thoughts due to regret.</h3>
 
 <ul>
-  {{#each burger}}
+  {{#each burgers}}
+	
+  
   	<li>
   	   <p>ID: {{this.id}}</p>
        <p>Task: {{this.burger_name}}</p>
+	   <button type="delete">Devour</button>
   	</li>
   {{/each}}
 </ul>
 
-<form action="/" method="POST">
+{{!-- <form action="/" method="POST">
 	<textarea type="text" name="task"></textarea>
 
 	<button type="submit">Submit</button>
-</form>
+</form> --}}
 
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="newBurger">Name your burger:</label>
+    <input type="text" id="newBurger" name="name">
+  </div>
+
+  {{!-- <div class="form-group">
+    <label for="sleepy">Sleepy?</label><br>
+    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
+    <input type="radio" name="sleepy" value="0"> Awake
+  </div> --}}
+
+  <button type="submit">Add Burger</button>
+</form>

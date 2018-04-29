@@ -1,8 +1,8 @@
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-    host: "127.0.0.1",
-    port: 8080,
+    host: "localhost",
+    port: 3306,
     user: "root",
     password: "50miler",
     database: "burgers_db"
@@ -13,7 +13,7 @@ connection.connect(function(error){
         console.error("error: ", error.stack);
         return;
     } 
-    concole.log("connected: ", connection.threadId);
+    console.log("db connected: ", connection.threadId);
     // put the starting function here
 
 })
