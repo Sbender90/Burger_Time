@@ -5,13 +5,29 @@
 
 <ul>
   {{#each burgers}}
-	
+	 {{#unless this.devour}}
   
   	<li>
   	   <p>ID: {{this.id}}</p>
        <p>Task: {{this.burger_name}}</p>
-	   <button type="delete">Devour</button>
+        <form action="/api/burgers/{{this.id}}?_method=PUT" method="POST">
+          <button type="submit">Devour</button> 
+        </form>
+	   {{!-- <button type="delete">Devour</button> --}}
   	</li>
+    {{/unless}}
+  {{/each}}
+</ul>
+<p>------------------------------------------</p>
+<h1>Devoured Burgers </h1>
+<ul>
+  {{#each burgers}}
+  {{#if this.devour}}
+  	<li>
+  	   <p>ID: {{this.id}}</p>
+       <p>Task: {{this.burger_name}}</p>
+  	</li>
+  {{/if}}
   {{/each}}
 </ul>
 
@@ -20,19 +36,27 @@
 
 	<button type="submit">Submit</button>
 </form> --}}
-
-<form class="create-form">
+<div class="row" id="burgers"class="col-3 col-md-3 col-sm-12">
+  <div class="col-3 col-md-3 col-sm-12"id="addburger">
+      <h2>Add A Burger</h2>
+      <br>
+    <form action="/api/burgers" method="POST">
+      <input type="text" id="newBurger" name="burger_name" placeholder="Burger">
+      <button type="submit" class="addBurgerButton">Add The Burger</button>
+    </form>
+  </div>
+{{!-- <form class="create-form">
 
   <div class="form-group">
     <label for="newBurger">Name your burger:</label>
     <input type="text" id="newBurger" name="name">
-  </div>
+  </div> --}}
 
   {{!-- <div class="form-group">
     <label for="sleepy">Sleepy?</label><br>
     <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
     <input type="radio" name="sleepy" value="0"> Awake
   </div> --}}
-
-  <button type="submit">Add Burger</button>
+{{!--  --}}
+  {{!-- <button type="submit">Add Burger</button> --}}
 </form>

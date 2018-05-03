@@ -22,39 +22,41 @@ router.get("/", function(request, response) {
 });
 // change connection to use the orm burger.??
 router.post("/api/burgers", function(request, response){
+    console.log("hi")
+    console.log(response)
     burger.create ([
-        "name", "devour"
+        "burger_name"
     ],[
-        request.body.burger_name, request.body.devour
+        request.body.burger_name
     ], function(result){
-        result.json({ id: result.insertId });
-        console.log("###################################", burger);
+        // result.json({ id: result.insertId });
+        // console.log("###################################", burger);
+        response.redirect("/");
     });
 });
 
-router.delete("/api/burgers/:id", function(request, response){
-    var condition = "id = ? " + request.params.id;
+// router.delete("/api/burgers/:id", function(request, response){
+//     var condition = "id =  " + request.params.id;
 
-    cat.delete(condition, function(result){
-        if (result.affectedRows == 0) {
-            return response.status(404).end();
-        } else{
-            response.status(200).end;
-        }
-    });
-});
-
-// router.put("burgers/:id", function(request, response){
-//     connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [request.body.burger_name, request.params.id], function(error, result) {
-//         if (error) {
-//             return res.status(500).end();
-//         }
-//         else if (result.changedRows === 0) {
+//     burger.delete(condition, function(result){
+//         if (result.affectedRows == 0) {
 //             return response.status(404).end();
+//         } else{
+//             response.status(200).end;
 //         }
-//         res.status(200).end();
 //     });
 // });
+
+router.put("/api/burgers/:id", function(request, response){
+    console.log("HEY")
+    var condition = "id =  " + request.params.id;
+console.log("cond :"+condition);
+    burger.update({
+devour:true
+    },condition,function(result){
+        response.redirect("/");
+    });
+});
 
 // router.delete("burgers/:id", function(request,response){
 //     connection.query("DELETE FROM burgers WHERE id = ?", [request.params.id], function(error, result){
