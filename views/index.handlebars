@@ -10,8 +10,8 @@
   	<li>
   	   <p>ID: {{this.id}}</p>
        <p>Task: {{this.burger_name}}</p>
-        <form action="/api/burgers/{{this.id}}?_method=PUT" method="POST">
-          <button type="submit">Devour</button> 
+        <form action="/api/burgers/{{this.id}}" method="PUT">
+          <button type="submit" onclick="devour({{this.id}})">Devour</button> 
         </form>
 	   {{!-- <button type="delete">Devour</button> --}}
   	</li>

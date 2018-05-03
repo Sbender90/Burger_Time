@@ -28,12 +28,12 @@ function objectSql(object){
 
 var orm = {
     all: function(tableInput, cb) {
-      console.log('inside orm.all')
+      // console.log('inside orm.all');
       var queryString = "SELECT * FROM " + tableInput + ";";
       console.log(`QS = ${queryString}`);
       // console.log(connection)
       connection.query(queryString, function(err, result) {
-        console.log('inside orm cb')
+        // console.log('inside orm cb')
         if (err) {
           throw err;
         }
@@ -50,7 +50,7 @@ var orm = {
       queryString += printQuestionMarks(vals.length);
       queryString += ") ";
   
-      console.log(queryString);
+      // console.log(queryString);
   
       connection.query(queryString, vals, function(err, result) {
         if (err) {
