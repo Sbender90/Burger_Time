@@ -4,59 +4,68 @@
 <h3>Or eat them and erase them from your thoughts due to regret.</h3>
 
 <ul>
-  {{#each burgers}}
-	 {{#unless this.devour}}
-  
-  	<li>
-  	   <p>ID: {{this.id}}</p>
-       <p>Task: {{this.burger_name}}</p>
-        <form action="/api/burgers/{{this.id}}" method="PUT">
-          <button type="submit" onclick="devour({{this.id}})">Devour</button> 
-        </form>
-	   {{!-- <button type="delete">Devour</button> --}}
-  	</li>
-    {{/unless}}
-  {{/each}}
+  {{#each burgers}} {{#unless this.devour}}
+
+  <div class="col-xs-3 text-center">
+    <pre>{{this.id}}. {{this.burger_name}}</pre>
+  </div>
+  <div class="col-xs-3 text-center">
+    <form method="POST" action="/burger/update?_method=PUT" class="button-size">
+      <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+      <br>
+      <button type="submit" class="btn btn-default">DEVOUR!</button>
+    </form>
+  </div>
+  {{!--
+  <li>
+    <p>ID: {{this.id}}</p>
+    <p>Task: {{this.burger_name}}</p>
+    <form action="/api/burgers/{{this.id}}" method="PUT">
+      <button type="submit" onclick="devour({{this.id}})">Devour</button>
+    </form>
+    {{!--
+    <button type="delete">Devour</button> --}}
+  </li> --}} {{/unless}} {{/each}}
 </ul>
 <p>------------------------------------------</p>
 <h1>Devoured Burgers </h1>
 <ul>
-  {{#each burgers}}
-  {{#if this.devour}}
-  	<li>
-  	   <p>ID: {{this.id}}</p>
-       <p>Task: {{this.burger_name}}</p>
-  	</li>
-  {{/if}}
-  {{/each}}
+  {{#each burgers}} {{#if this.devour}}
+  <li>
+    <p>ID: {{this.id}}</p>
+    <p>Task: {{this.burger_name}}</p>
+  </li>
+  {{/if}} {{/each}}
 </ul>
 
-{{!-- <form action="/" method="POST">
-	<textarea type="text" name="task"></textarea>
+{{!--
+<form action="/" method="POST">
+  <textarea type="text" name="task"></textarea>
 
-	<button type="submit">Submit</button>
+  <button type="submit">Submit</button>
 </form> --}}
-<div class="row" id="burgers"class="col-3 col-md-3 col-sm-12">
-  <div class="col-3 col-md-3 col-sm-12"id="addburger">
-      <h2>Add A Burger</h2>
-      <br>
+<div class="row" id="burgers" class="col-3 col-md-3 col-sm-12">
+  <div class="col-3 col-md-3 col-sm-12" id="addburger">
+    <h2>Add A Burger</h2>
+    <br>
     <form action="/api/burgers" method="POST">
       <input type="text" id="newBurger" name="burger_name" placeholder="Burger">
       <button type="submit" class="addBurgerButton">Add The Burger</button>
     </form>
   </div>
-{{!-- <form class="create-form">
+  {{!--
+  <form class="create-form">
 
-  <div class="form-group">
-    <label for="newBurger">Name your burger:</label>
-    <input type="text" id="newBurger" name="name">
-  </div> --}}
-
-  {{!-- <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div> --}}
-{{!--  --}}
-  {{!-- <button type="submit">Add Burger</button> --}}
-</form>
+    <div class="form-group">
+      <label for="newBurger">Name your burger:</label>
+      <input type="text" id="newBurger" name="name">
+    </div> --}} {{!--
+    <div class="form-group">
+      <label for="sleepy">Sleepy?</label>
+      <br>
+      <input type="radio" name="sleepy" value="1" checked> Sleepy!
+      <br>
+      <input type="radio" name="sleepy" value="0"> Awake
+    </div> --}} {{!-- --}} {{!--
+    <button type="submit">Add Burger</button> --}}
+  </form>

@@ -35,30 +35,25 @@ router.post("/api/burgers", function(request, response){
     });
 });
 
-// router.delete("/api/burgers/:id", function(request, response){
-//     var condition = "id =  " + request.params.id;
-
-//     burger.delete(condition, function(result){
-//         if (result.affectedRows == 0) {
-//             return response.status(404).end();
-//         } else{
-//             response.status(200).end;
-//         }
-//     });
-// });
-
-router.put("/api/burgers/:id", function(request, response){
-    console.log("HEY")
-    var condition = "id =  " + request.params.id;
-console.log("cond :"+condition);
-    burger.update({
-devour:true
-    },condition,function(result){
-        response.redirect("/");
+router.put("/burgers/update", function(req, res) {
+    burger.update(req.body.burger_id, function(result){
+        console.log(result);
+        res.redirect("/");
     });
 });
 
-// router.delete("burgers/:id", function(request,response){
+// router.put("/api/burgers/:id", function(request, response){
+//     console.log("HEY")
+//     var condition = "id =  " + request.params.id;
+// console.log("cond :"+condition);
+//     burger.update({
+// devour:true
+//     },condition,function(result){
+//         response.redirect("/");
+//     });
+// });
+
+// router.put("burgers/:id", function(request,response){
 //     connection.query("DELETE FROM burgers WHERE id = ?", [request.params.id], function(error, result){
 //         if (error){
 //             return res.status(500).end();

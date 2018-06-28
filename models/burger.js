@@ -11,11 +11,16 @@ var burger = {
             callback(response);
         });
     },
-    update: function(objectCollValues, current, callback) {
-        orm.update("burgers", objectCollValues, current, function(response){
-            callback(response);
-        });
+
+    update: function(id, callback){
+        orm.update('burgers',id,callback);
     },
+   
+    // update: function(objectCollValues, current, callback) {
+    //     orm.update("burgers", objectCollValues, current, function(response){
+    //         callback(response);
+    //     });
+    // },
     delete: function(condition, callback){
         orm.delete("burgers", condition, function(response){
             callback(response);
